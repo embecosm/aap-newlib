@@ -1,0 +1,4 @@
+2015-05-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* libtool.m4 (_LT_SYS_MODULE_PATH_AIX, _LT_LINKER_SHLIBS): Fix
+	need for AC_LANG_SOURCE for autoconf 2.68.
