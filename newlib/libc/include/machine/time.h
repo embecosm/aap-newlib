@@ -5,6 +5,8 @@
 #define _CLOCKS_PER_SEC_ 1000000
 #elif defined(__aarch64__) || defined(__arm__) || defined(__thumb__)
 #define _CLOCKS_PER_SEC_ 100
+#elif defined(__aap__)
+#define _CLOCKS_PER_SEC_ 1000000
 #endif
 
 #ifdef __SPU__

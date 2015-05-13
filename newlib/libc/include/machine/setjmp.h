@@ -1,6 +1,12 @@
 
 _BEGIN_STD_C
 
+#if defined(__aap__)
+#define _JBLEN 26 /* LR, SP and all call-saved regs */
+#define _JBTYPE unsigned short int
+#endif
+
+
 #if defined(__or1k__) || defined(__or1knd__)
 #define _JBLEN 31 /* 32 GPRs - r0 */
 #define _JBTYPE unsigned long

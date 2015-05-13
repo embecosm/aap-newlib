@@ -1,0 +1,13 @@
+2015-05-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* libc/include/machine/ieeefp.h: Add AAP values.
+	* libc/include/machine/setjmp.h: Add buffer details for AAP.
+	* libc/include/machine/time.h: Add clock ticks for AAP.
+	* libc/machine/aap/Makefile.am: Created.
+	* libc/machine/aap/Makefile.in: Generated.
+	* libc/machine/aap/aclocal.m4: Created.
+	* libc/machine/aap/configure: Regenerated.
+	* libc/machine/aap/configure.ac: Created.
+	* libc/machine/aap/setjmp.S: Created.
+	* libc/machine/configure: Regenerated.
+

@@ -1,0 +1,172 @@
+# Autoconf input file.
+
+# Copyright (c) 1998 Cygnus Support
+# Copyright (C) 2010, 2015 Embecosm Limited <info@embecosm.com>
+
+# Contributor Jeremy Bennett <jeremy.bennett@embecosm.com>
+
+# This code forms part of newlib for AAP
+
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+
+#   * Redistributions of source code must retain the above copyright notice,
+#     this list of conditions and the following disclaimer.
+#   * Redistributions in binary form must reproduce the above copyright
+#     notice, this list of conditions and the following disclaimer in the
+#     documentation and/or other materials provided with the distribution.
+#   * Neither the name of Embecosm nor the names of its contributors may be
+#     used to endorse or promote products derived from this software without
+#     specific prior written permission.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS;
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE. */
+
+# The code on which this is based includes the following license info:
+
+# The authors hereby grant permission to use, copy, modify, distribute,
+# and license this software and its documentation for any purpose, provided
+# that existing copyright notices are retained in all copies and that this
+# notice is included verbatim in any distributions. No written agreement,
+# license, or royalty fee is required for any of the authorized uses.
+# Modifications to this software may be copyrighted by their authors
+# and need not follow the licensing terms described here, provided that
+# the new terms are clearly indicated on the first page of each file where
+# they apply.
+
+DESTDIR =
+VPATH = @srcdir@
+srcdir = @srcdir@
+objdir = .
+srcroot = $(srcdir)/../..
+objroot = $(objdir)/../..
+
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+host_alias = @host_alias@
+target_alias = @target_alias@
+program_transform_name = @program_transform_name@
+
+bindir = @bindir@
+libdir = @libdir@
+tooldir = $(exec_prefix)/$(target_alias)
+
+# Multilib support variables.
+# TOP is used instead of MULTI{BUILD,SRC}TOP.
+MULTIDIRS =
+MULTISUBDIR =
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+SHELL =	/bin/sh
+
+CC = @CC@
+AS = @AS@
+AR = @AR@
+LD = @LD@
+RANLIB = @RANLIB@
+
+OBJDUMP = `if [ -f ${objroot}/../binutils/objdump ] ; \
+	then echo ${objroot}/../binutils/objdump ; \
+	else t='$(program_transform_name)'; echo objdump | sed -e $$t ; fi`
+OBJCOPY = `if [ -f ${objroot}/../binutils/objcopy ] ; \
+	then echo ${objroot}/../binutils/objcopy ; \
+	else t='$(program_transform_name)'; echo objcopy | sed -e $$t ; fi`
+
+# object files needed
+OBJS = chown.o close.o environ.o errno.o execve.o fork.o fstat.o \
+	getpid.o gettod.o isatty.o kill.o link.o lseek.o open.o \
+	read.o readlink.o sbrk.o stat.o symlink.o times.o unlink.o \
+	wait.o write.o _exit.o
+
+# Add our own flags for C compilation
+CFLAGS =  -g
+
+# Our own C runtime startup and BSPs
+CRT0     	= crt0.o
+LIBAAP      	= libaap.a
+
+OUTPUTS  = $(CRT0) $(LIBAAP)
+
+# The standard object files for the library
+LIBAAP_OBJS =	_exit.o      		\
+		close.o      		\
+		environ.o    		\
+		execve.o     		\
+		fork.o       		\
+		fstat.o 		\
+		getpid.o     		\
+		isatty.o 		\
+		kill.o       		\
+		link.o       		\
+		lseek.o 		\
+		open.o       		\
+		read.o  		\
+		sbrk.o       		\
+		stat.o       		\
+		times.o      		\
+		unlink.o     		\
+		wait.o       		\
+		write.o
+
+# Host specific makefile fragment specifies the automatic rules
+@host_makefile_frag@
+
+# Build what we need out
+all: $(OUTPUTS) $(BOARD_LIBS)
+
+# Rules to build the BSPs from their objects. No need for a rule to build
+# crt0.o, that happens autmatically from .S
+$(LIBAAP): $(LIBAAP_OBJS)
+	${AR} ${ARFLAGS} $@ $^
+	${RANLIB} $@
+
+%.a: %.o
+	${AR} ${ARFLAGS} $@ $^
+	${RANLIB} $@
+
+# Standard clean up rules.
+clean mostlyclean:
+	rm -f $(OUTPUTS) *.i *~ *.o *-test *.srec *.dis *.map *.x
+
+distclean maintainer-clean realclean: clean
+	rm -f Makefile config.status *~
+
+# Standard install rules for libaap and crt0
+.PHONY: install info install-info clean-info
+install:
+	@for outputs in ${OUTPUTS}; do\
+	     mkdir -p $(DESTDIR)$(tooldir)/lib${MULTISUBDIR}; \
+	     $(INSTALL_PROGRAM) $${outputs} \
+				$(DESTDIR)$(tooldir)/lib${MULTISUBDIR}; \
+	done; \
+	for board in ${BOARDS}; do\
+	     mkdir -p $(DESTDIR)$(tooldir)/lib${MULTISUBDIR}/boards/$${board}; \
+	     $(INSTALL_PROGRAM) $${board}.a \
+			$(DESTDIR)$(tooldir)/lib${MULTISUBDIR}/boards/$${board}/$(LIBBOARD); \
+	done
+
+# Deal with info if we had any.
+info:
+install-info:
+clean-info:
+
+
+# Standard make and configure dependencies.
+Makefile: Makefile.in config.status @host_makefile_frag_path@
+	$(SHELL) config.status
+
+config.status: configure
+	$(SHELL) config.status --recheck

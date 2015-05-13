@@ -1,3 +1,7 @@
+2015-05-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* COPYING.LIBGLOSS: Updated for AAP.
+
 2015-05-12  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* libtool.m4 (_LT_SYS_MODULE_PATH_AIX, _LT_LINKER_SHLIBS): Fix

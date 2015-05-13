@@ -1,0 +1,31 @@
+2015-05-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* aap/Makefile.in: Created.
+	* aap/_exit.c: Created.
+	* aap/aclocal.m4: Created.
+	* aap/close.c: Created.
+	* aap/config.h.in: Generated.
+	* aap/configure: Generated.
+	* aap/configure.ac: Created.
+	* aap/crt0.S: Created.
+	* aap/environ.c: Created.
+	* aap/execve.c: Created.
+	* aap/fork.c: Created.
+	* aap/fstat.c: Created.
+	* aap/getpid.c: Created.
+	* aap/isatty.c: Created.
+	* aap/kill.c: Created.
+	* aap/link.c: Created.
+	* aap/lseek.c: Created.
+	* aap/open.c: Created.
+	* aap/read.c: Created.
+	* aap/sbrk.c: Created.
+	* aap/stat.c: Created.
+	* aap/times.c: Created.
+	* aap/unlink.c: Created.
+	* aap/wait.c: Created.
+	* aap/write.c: Created.
+	* configure: Regenerated.
+	* configure.in: Added AAP as target.
+	* libnosys/configure: Regenerated.
+	* libnosys/configure.in: Added AAP as target.
