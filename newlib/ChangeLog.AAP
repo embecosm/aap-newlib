@@ -1,3 +1,8 @@
+2015-05-29  Edward Jones  <ed.jones@embecosm.com>
+
+  * configure.host: Add AAP as a host.
+  * libc/include/machine/ieeefp.h: Use correct define for AAP.
+
 2015-05-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* libc/include/machine/ieeefp.h: Add AAP values.

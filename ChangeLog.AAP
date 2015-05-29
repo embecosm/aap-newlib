@@ -1,3 +1,9 @@
+2015-05-29  Edward Jones  <ed.jones@embecosm.com>
+
+  * config.sub: Add AAP as a basic machine.
+  * configure.ac: Add AAP target configuration.
+  * configure: Regenerated.
+
 2015-05-13  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* COPYING.LIBGLOSS: Updated for AAP.

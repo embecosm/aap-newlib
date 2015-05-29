@@ -50,7 +50,7 @@
 	
 */
 
-#if defined (__aap__)
+#if defined (__AAP__)
 #define __IEEE_LITTLE_ENDIAN
 #endif
 

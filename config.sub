@@ -248,6 +248,7 @@ case $basic_machine in
 	# Some are omitted here because they have special meanings below.
 	1750a | 580 \
 	| a29k \
+	| aap \
 	| aarch64 | aarch64_be \
 	| alpha | alphaev[4-8] | alphaev56 | alphaev6[78] | alphapca5[67] \
 	| alpha64 | alpha64ev[4-8] | alpha64ev56 | alpha64ev6[78] | alpha64pca5[67] \
@@ -467,6 +468,9 @@ case $basic_machine in
 	a29khif)
 		basic_machine=a29k-amd
 		os=-udi
+		;;
+	aap-*)
+		os=-elf
 		;;
 	abacus)
 		basic_machine=abacus-unknown
