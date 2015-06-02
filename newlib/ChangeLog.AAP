@@ -1,3 +1,7 @@
+2015-06-02  Edward Jones  <ed.jones@embecosm.com>
+
+	* libc/include/machine/ieeefp.h: Use small bitfield for AAP floats.
+
 2015-05-29  Edward Jones  <ed.jones@embecosm.com>
 
   * configure.host: Add AAP as a host.

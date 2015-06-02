@@ -52,6 +52,7 @@
 
 #if defined (__AAP__)
 #define __IEEE_LITTLE_ENDIAN
+#define __SMALL_BITFIELDS /* 16-bit INT */
 #endif
 
 #if (defined(__arm__) || defined(__thumb__)) && !defined(__MAVERICK__)
