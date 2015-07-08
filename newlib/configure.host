@@ -97,7 +97,7 @@ case "${host_cpu}" in
 	machine_dir=a29k
 	;;
   aap)
-	machine_dir=
+	machine_dir=aap
 	;;
   aarch64*)
 	machine_dir=aarch64

@@ -1,3 +1,8 @@
+2015-07-08  Simon Cook  <simon.cook@embecosm.com>
+
+	* configure.host: Add aap machine directory.
+	* libc/machine/aap/setjmp.S: Remove hashes from immediates.
+
 2015-06-02  Edward Jones  <ed.jones@embecosm.com>
 
 	* libc/include/machine/ieeefp.h: Use small bitfield for AAP floats.

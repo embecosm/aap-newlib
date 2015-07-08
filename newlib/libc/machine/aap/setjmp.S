@@ -80,7 +80,7 @@ setjmp:
 
 	/* Return 0 since we are calling setjmp directly. */
 
-	mov	$r2,#0
+	mov	$r2, 0
 	jmp	$r0
 	.size	setjmp, .-setjmp
 
@@ -139,7 +139,7 @@ longjmp:
 
 	sub	$r2, $r2, $r2
 	bne	1f, $r3, $r2
-	mov	$r3,#1
+	mov	$r3, 1
 
 	/* Set result and return */
 1:
