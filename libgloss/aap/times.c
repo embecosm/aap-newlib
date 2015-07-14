@@ -58,7 +58,7 @@ _times (struct tms *buf)
   } aap_buf;
   struct aap_time *aap_buf_ptr = &aap_buf;
 
-  __asm__ volatile ("\tnop\t%1,#5" : : "r" (aap_buf_ptr));
+  asm volatile ("nop    %0,   5" : : "r" (aap_buf_ptr));
 
   buf->tms_utime  = aap_buf.t_sec * 1000000 + aap_buf.t_usec;
   buf->tms_stime  = 0;

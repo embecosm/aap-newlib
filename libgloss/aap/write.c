@@ -57,33 +57,23 @@ _write (int   file,
   int i;
   int nop_const;
 
-  switch (file)
-    {
-    case STDOUT_FILENO:
-
-      nop_const = 3;		/* Select the correct NOP const */
-      break;
-
-    case STDERR_FILENO:
-
-      nop_const = 4;		/* Select the correct NOP const */
-      break;
-
-    default:
-
-      /* We only handle standard output and standard error */
-
-      errno = EBADF;
-      return -1;
-    }
+  if ((file != STDOUT_FILENO) &&
+      (file != STDERR_FILENO)) {
+    errno = EBADF;
+    return -1;
+  }
 
   /* Output character at at time */
-
-  for (i = 0; i < nbytes; i++)
+  for (i = 0; i < len; i++)
     {
-      __asm__ volatile ("\tnop\t%1,#%2" : : "r" (buf[i]) , "k" (nop_const));
+      if (file == STDOUT_FILENO) {
+	asm volatile ("nop  %0,  3" : : "r" (ptr[i]));
+      }
+      else if (file == STDERR_FILENO) {
+	asm volatile ("nop  %0,  4" : : "r" (ptr[i]));
+      }
     }
 
-  return nbytes;
+  return len;
 
 }	/* _write () */

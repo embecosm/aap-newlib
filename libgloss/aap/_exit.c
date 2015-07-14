@@ -38,14 +38,12 @@
     be used to trigger pre-defined side effects.  One of these is to signal
     exit, with a return code in the specified register.
 
-    @param[in] rc  The return code. */
+    @param[in] retcode  The return code. */
 
-void
-_exit (int  rc) __attribute__ ((noreturn))
+__attribute__ ((noreturn))
+void _exit (int  retcode)
 {
-  __asm__ volatile ("\tnop\t%1,#2" : : "r" (rc));
+  asm volatile ("nop  %0,  2" : : "r" (retcode));
 
-  while (true)
-    ;
-
+  while (1);
 }	/* _exit () */

@@ -1,3 +1,14 @@
+2015-07-14  Edward Jones  <ed.jones@embecoms.com>
+
+	* aap/crt0.S: Fixed asm, simplified.
+	* aap/_exit.c: Fixed inline asm.
+	* aap/times.c: Likewise.
+	* aap/write.c: Likewise.
+	* aap/aclocal.m4:	Removed as unnecessary.
+	* aap/configure.in: Updated.
+	* aap/config.h.in: Regenerated.
+	* aap/configure: Likewise.
+
 2015-07-08  Simon Cook  <simon.cook@embecosm.com>
 
 	* aap/configure.ac: Renamed...

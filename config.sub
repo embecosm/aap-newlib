@@ -469,9 +469,6 @@ case $basic_machine in
 		basic_machine=a29k-amd
 		os=-udi
 		;;
-	aap-*)
-		os=-elf
-		;;
 	abacus)
 		basic_machine=abacus-unknown
 		;;
@@ -1559,6 +1556,9 @@ case $basic_machine in
 		;;
 	*-acorn)
 		os=-riscix1.2
+		;;
+	aap-*)
+		os=-elf
 		;;
 	arm*-rebel)
 		os=-linux

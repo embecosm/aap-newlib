@@ -606,6 +606,9 @@ case "${host}" in
 	newlib_cflags="${newlib_cflags} -DNO_EXEC"
 	syscall_dir=syscalls
 	;;
+  aap-*-*)
+	syscall_dir=syscalls
+	;;
   aarch64*-*-*)
 	default_newlib_io_long_long="yes"
 	syscall_dir=syscalls

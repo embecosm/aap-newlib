@@ -1,3 +1,8 @@
+2015-07-14  Edward Jones  <ed.jones@embecosm.com>
+
+	* newlib/configure.host: Define syscalls_dir for app.
+	* config.sub: Define AAP as an elf target in the correct place.
+
 2015-05-29  Edward Jones  <ed.jones@embecosm.com>
 
   * config.sub: Add AAP as a basic machine.

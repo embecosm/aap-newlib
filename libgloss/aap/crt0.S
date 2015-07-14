@@ -36,34 +36,26 @@
 
     This function takes no arguments and never returns. */
 
-	.section  text
-	.global	_start
-	.type	_start, function
+	.section  .text
+	.global	  _start
+	.type	    _start,@function
 _start:
+  ; Descending stack, assume that it is a maximum of 64kB
+  mov   $r1,  ___stack_end
 
-	/* Stack falls from the top of memory.  For now we assume 64kB of
-	   RAM. */
+  ; TODO: Clear BSS
+  ; TODO: Call init, and pass fini to atexit
 
-	mov	$r1, #0xffff
+  ; Call main, with zeroed arguments. If it returns, then pass the return value
+  ; to exit
+	mov	  $r2,  0
+	mov	  $r3,  0
+	mov	  $r4,  0
+	bal	  main,   $r0
+	bal	  _exit,  $r0
 
-	/* Optionally clear BSS (for debugging) here. */
-
-	/* Call init to set up constructors, and pass fini to atexit. */
-
-	bal	init, $r0
-	mov	$r2,#fini
-	bal	atexit, $r0
-
-	/* Call the main function, setting the args to zero. If it returns,
-	   call _exit with the result. */
-
-	mov	$r2, 0
-	mov	$r3, 0
-	mov	$r4, 0
-	bal	main
-	bal	_exit
-
-	/* We should never get here, but just in case... */
+  ; Should never reach this point, but just in case...
 1:
 	bra	1b
-	size	_start, .-_start
+	.size	_start, .-_start
+
