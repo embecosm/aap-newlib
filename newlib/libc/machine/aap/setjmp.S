@@ -80,7 +80,7 @@ setjmp:
 
 	/* Return 0 since we are calling setjmp directly. */
 
-	mov	$r2, 0
+	movi	$r2, 0
 	jmp	$r0
 	.size	setjmp, .-setjmp
 

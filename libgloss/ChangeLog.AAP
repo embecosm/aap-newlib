@@ -1,3 +1,7 @@
+2015-10-07  Edward Jones  <ed.jones@embecosm.com>
+
+	* aap/crt0.S: Update instruction mnemonics.
+
 2015-07-14  Edward Jones  <ed.jones@embecoms.com>
 
 	* aap/crt0.S: Fixed asm, simplified.

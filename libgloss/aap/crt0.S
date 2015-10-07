@@ -41,21 +41,20 @@
 	.type	    _start,@function
 _start:
   ; Descending stack, assume that it is a maximum of 64kB
-  mov   $r1,  ___stack_end
+  movi  $r1,  ___stack_end
 
   ; TODO: Clear BSS
-  ; TODO: Call init, and pass fini to atexit
 
   ; Call main, with zeroed arguments. If it returns, then pass the return value
   ; to exit
-	mov	  $r2,  0
-	mov	  $r3,  0
-	mov	  $r4,  0
+	movi  $r2,  0
+	movi  $r3,  0
+	movi  $r4,  0
 	bal	  main,   $r0
 	bal	  _exit,  $r0
 
   ; Should never reach this point, but just in case...
 1:
-	bra	1b
+	bra	  1b
 	.size	_start, .-_start
 
