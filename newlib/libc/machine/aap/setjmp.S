@@ -139,7 +139,7 @@ longjmp:
 
 	sub	$r2, $r2, $r2
 	bne	1f, $r3, $r2
-	mov	$r3, 1
+	movi	$r3, 1
 
 	/* Set result and return */
 1:
